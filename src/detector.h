@@ -38,5 +38,5 @@ private:
     vector<Blob<float>*> m_blobs;
 
     float m_thresh = 0.001;
-    int m_classes = 80; //coco classes
+    int m_classes = 1; //coco classes
 };

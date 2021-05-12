@@ -62,9 +62,18 @@ Detector::~Detector(){
 
 std::vector<bbox_t> Detector::detect(std::string image_path,float thresh){
     //load image
+#if 0
     image im = load_image_color((char*)image_path.c_str(),0,0);
     image sized = letterbox_image(im,m_net_input_data_blobs->width(),m_net_input_data_blobs->height());
-
+#else
+    // darknet源工程默认使用letterbox缩放图片，而darknet-AlexeyAB默认使用resize缩放图片
+    image im;
+	image sized = load_image_resize((char *)image_path.c_str(), 
+		m_net_input_data_blobs->width(),
+		m_net_input_data_blobs->height(),
+		m_net_input_data_blobs->channels(),
+		&im);
+#endif
     //copy data from cpu to gpu
     int size = m_net_input_data_blobs->channels()*m_net_input_data_blobs->width()*m_net_input_data_blobs->height();
     cuda_push_array(m_net_input_data_blobs->mutable_gpu_data(),sized.data,size);
@@ -117,8 +126,18 @@ std::vector<bbox_t> Detector::detect(cv::Mat mat,float thresh){
     //convert mat to image
     if(mat.data == NULL)
         throw std::runtime_error("Mat is empty");
+#if 0
     image im = mat_to_image(mat);
     image sized = letterbox_image(im,m_net_input_data_blobs->width(),m_net_input_data_blobs->height());
+#else
+    // darknet源工程默认使用letterbox缩放图片，而darknet-AlexeyAB默认使用resize缩放图片
+    image im;
+	image sized = load_mat_resize(mat, 
+		m_net_input_data_blobs->width(),
+		m_net_input_data_blobs->height(),
+		m_net_input_data_blobs->channels(),
+		&im);
+#endif
 
     //copy data from cpu to gpu
     int size = m_net_input_data_blobs->channels()*m_net_input_data_blobs->width()*m_net_input_data_blobs->height();

@@ -43,8 +43,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_OUTPUT_DIR}/lib)
 # build C/C++ interface
 include_directories(${PROJECT_INCLUDE_DIR} ${GIE_PATH}/include)
 include_directories(${PROJECT_INCLUDE_DIR} 
-	/home/chen/caffe/include 
-	/home/chen/caffe/build/include 
+	/root/open_source/caffe/include 
+	/root/open_source/caffe/build/include 
 )
 
 
@@ -53,11 +53,10 @@ file(GLOB inferenceIncludes src/*.h )
 
 cuda_add_library(yolov3-plugin SHARED ${inferenceSources})
 target_link_libraries(yolov3-plugin 
-	/home/chen/caffe/build/lib/libcaffe.so  
-	/usr/lib/x86_64-linux-gnu/libglog.so  
-	/usr/lib/x86_64-linux-gnu/libgflags.so.2
-    	/usr/lib/x86_64-linux-gnu/libboost_system.so  
-	/usr/lib/x86_64-linux-gnu/libGLEW.so.1.13  
+	/root/open_source/caffe/build/lib/libcaffe.so  
+	/usr/lib64/libglog.so  
+	/usr/lib64/libgflags.so
+    	/usr/lib64/libboost_system.so  
 )
 
 

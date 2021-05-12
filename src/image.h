@@ -6,6 +6,9 @@
 #ifndef __IMAGE_H_
 #define __IMAGE_H_
 
+#include <opencv2/opencv.hpp>
+using namespace cv;
+
 typedef struct
 {
     int w;
@@ -18,6 +21,9 @@ image make_image(int w, int h, int c);
 
 image make_empty_image(int w, int h, int c);
 
+image load_image_resize(char *filename, int w, int h, int c, image *im);
+
+image load_mat_resize(Mat mat,int w, int h, int c, image *im);
 
 image load_image_color(char* filename,int w,int h);
 

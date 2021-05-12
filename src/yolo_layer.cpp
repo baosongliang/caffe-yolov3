@@ -13,13 +13,16 @@
 #include <math.h>
 
 //yolov3
-//float biases[18] = {10,13,16,30,33,23,30,61,62,45,59,119,116,90,156,198,373,326};
+// float biases[18] = {10,13,16,30,33,23,30,61,62,45,59,119,116,90,156,198,373,326};
 
 //yolov4
 float biases[18] = {12, 16, 19, 36, 40, 28, 36, 75, 76, 55, 72, 146, 142, 110, 192, 243, 459, 401};
 
 //yolov3-tiny
-float biases_tiny[12] = {10,14,23,27,37,58,81,82,135,169,344,319};
+//float biases_tiny[12] = {10,14,23,27,37,58,81,82,135,169,344,319};
+// float biases_tiny[12] = {15,14,21,19,26,24,32,30,38,36,45,44};  // fish_eye
+float biases_tiny[12] = {37,38,45,42,45,51,52,55,56,65,62,59};  // tof
+
 
 layer make_yolo_layer(int batch,int w,int h,int net_w,int net_h,int n,int total,int classes)
 {
